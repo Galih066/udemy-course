@@ -16,6 +16,7 @@ export class UsersService {
     }
 
     findOne(id: number) {
+        if (!id) return null
         return this.repo.findOne({ where: { id: id } })
     }
 
@@ -28,7 +29,7 @@ export class UsersService {
         if (!user) {
             throw new NotFoundException('User not found')
         }
-        
+
         Object.assign(user, attrs)
         return this.repo.save(user)
     }
